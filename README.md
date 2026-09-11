@@ -1,19 +1,19 @@
 # Worklog App
 
-A lightweight local web app for viewing and managing Jira worklogs across the QA team. Wraps the Jira REST API v3 so you never have to open the Jira worklog dialog.
+A lightweight local web app for viewing and managing Jira worklogs across the team. Wraps the Jira REST API v3 so you never have to open the Jira worklog dialog.
 
 ## What it does
 
 - Week view — browse any week, day by day, with total hours per day and per week
 - Switch between team members from a dropdown (pre-seeded from `.env`)
 - Create, edit, and delete worklogs through a modal form
-- Issue picker with autocomplete — type a key like `PCA-19883` or a keyword to search
+- Issue picker with autocomplete — type a key like `PWL-12345` or a keyword to search
 - All times displayed and entered in IST
 
 ## Requirements
 
 - Node 22+
-- A Jira account with API access to `loginradius.atlassian.net`
+- A Jira account with API access to `yourorg.atlassian.net`
 
 ## Setup
 
