@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Worklog</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── top bar ── -->
+  <header class="topbar">
+    <span class="topbar-brand">Worklog</span>
+    <div class="topbar-controls">
+      <div class="user-picker" id="userPicker">
+        <button class="user-btn" id="userBtn" aria-haspopup="true" aria-expanded="false">
+          <span class="user-avatar" id="userAvatar">?</span>
+          <span id="userLabel">Select person</span>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="user-dropdown" id="userDropdown" hidden>
+          <input class="user-search" id="userSearch" type="text" placeholder="Search name…" autocomplete="off" />
+          <div class="user-list" id="userList"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── main ── -->
+  <main class="main" id="main">
+
+    <!-- week nav -->
+    <div class="week-nav">
+      <button class="nav-btn" id="prevWeek" title="Previous week">
+        <svg width="16" height="16" viewBox="0 0 16 16"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      </button>
+      <div class="week-label-wrap">
+        <span class="week-label" id="weekLabel"></span>
+        <button class="today-btn" id="todayBtn">Today</button>
+      </div>
+      <button class="nav-btn" id="nextWeek" title="Next week">
+        <svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      </button>
+    </div>
+
+    <!-- week summary strip -->
+    <div class="week-strip" id="weekStrip"></div>
+
+    <!-- day cards -->
+    <div class="days" id="days"></div>
+
+  </main>
+
+  <!-- ── modal ── -->
+  <div class="modal-overlay" id="modalOverlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">Log time</h2>
+        <button class="modal-close" id="modalClose" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+      <form class="modal-form" id="modalForm" novalidate>
+        <input type="hidden" id="fIssueKey" />
+        <input type="hidden" id="fWorklogId" />
+        <input type="hidden" id="fDate" />
+
+        <div class="field">
+          <label for="fIssueSearch">Issue</label>
+          <div class="issue-wrap">
+            <input id="fIssueSearch" type="text" placeholder="PCA-19657 or search…" autocomplete="off" />
+            <div class="issue-results" id="issueResults" hidden></div>
+          </div>
+          <span class="field-hint" id="issueSummaryHint"></span>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="fDate2">Date <span class="field-sub">(IST)</span></label>
+            <input id="fDate2" type="date" required />
+          </div>
+          <div class="field">
+            <label for="fTime">Time <span class="field-sub">(IST)</span></label>
+            <input id="fTime" type="time" value="09:00" required />
+          </div>
+          <div class="field">
+            <label for="fDuration">Duration</label>
+            <input id="fDuration" type="text" placeholder="e.g. 2h 30m" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="fComment">Comment <span class="field-sub">(optional)</span></label>
+          <textarea id="fComment" rows="3" placeholder="What did you work on?"></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-danger" id="deleteBtn" hidden>Delete</button>
+          <div class="modal-actions-right">
+            <button type="button" class="btn-ghost" id="cancelBtn">Cancel</button>
+            <button type="submit" class="btn-primary" id="saveBtn">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── toast ── -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
